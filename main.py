@@ -14,12 +14,9 @@ df['Position'].value_counts()
 
 plt.scatter(df['Level'],df['Salary'])
 
-X=df.iloc[:,1].values.reshape(-1,1)
-y=df.iloc[:,-1].values
+X=df.iloc[:, 1:2].values
+y=df.iloc[:, 2].values
 
-X
-
-y
 
 # Splitting data set
 from sklearn.model_selection import train_test_split
@@ -39,11 +36,16 @@ print('The r2 score',r2_score(y_test,y_pred))
 print('The rmse',np.sqrt(mean_squared_error(y_test,y_pred)))
 print('The mean absolute error',mean_absolute_error(y_test,y_pred))
 
+# Plotting the years and Salary
 plt.plot(X_test,y_pred,color='red')
 plt.scatter(X,y)
+plt.plot(X_train, y_train, 'o', label='data')
+plt.plot(X_test, y_test, label='true')
+plt.xlabel('$Years$')
+plt.ylabel('$Salary$')
 plt.legend()
 plt.show()
-
+print(f"The linerar projected of 5.5 is: {L.predict([[5.5]])}")
 from sklearn.preprocessing import PolynomialFeatures
 poly = PolynomialFeatures(degree = 5)
 X_train_poly=poly.fit_transform(X_train)
@@ -98,8 +100,19 @@ print('The r2 score',r2_score(y_test,y_pred_6))
 print('The rmse',np.sqrt(mean_squared_error(y_test,y_pred_6)))
 print('The mean absolute error',mean_absolute_error(y_test,y_pred_6))
 
-
+# Plotting the years and salary
 plt.scatter(X_test,y_pred_6,color='red')
 plt.scatter(X,y,marker='+',color='green')
+plt.plot(X_train, y_train, 'o', label='data')
+plt.plot(X_test, y_test, label='true')
+plt.xlabel('$Years$')
+plt.ylabel('$Salary$')
 plt.legend()
 plt.show()
+
+# What is the 6th degree PolynomialFeature
+print(f"The 6th degree PolynomialFeature is {y_pred_6}")
+
+
+
+
